@@ -19,21 +19,21 @@ QMap<QString, QVariant>MainWindow:: extractJsonObject(const QString& prefix, con
             const QJsonValue& jsonVal = jsonObject.value(k);
             if (jsonVal.isNull()) {
                        ret[key] = "null";
-                   } else if (jsonVal.isUndefined()) {
-                       ret[key] = "undef";
-                   } else if (jsonVal.isBool()) {
-                       bool value = jsonVal.toBool();
-                       ret[key] = value;
-                   } else if (jsonVal.isObject()) {
-                       QMap<QString, QVariant> nestedMap = extractJsonObject(key, jsonVal.toObject());
-                       ret.unite(nestedMap);
-                   } else if (jsonVal.isArray()) {
-                       QJsonArray jsonArray = jsonVal.toArray();
-                       QMap<QString, QVariant> nestedMap = extractJsonArray(key, jsonArray);
-                       ret.unite(nestedMap);
-                   } else {
-                       ret[key] = jsonVal.toVariant();
-                   }
+           } else if (jsonVal.isUndefined()) {
+               ret[key] = "undef";
+           } else if (jsonVal.isBool()) {
+               bool value = jsonVal.toBool();
+               ret[key] = value;
+           } else if (jsonVal.isObject()) {
+               QMap<QString, QVariant> nestedMap = extractJsonObject(key, jsonVal.toObject());
+               ret.unite(nestedMap);
+           } else if (jsonVal.isArray()) {
+               QJsonArray jsonArray = jsonVal.toArray();
+               QMap<QString, QVariant> nestedMap = extractJsonArray(key, jsonArray);
+               ret.unite(nestedMap);
+           } else {
+               ret[key] = jsonVal.toVariant();
+           }
          }
 
 
